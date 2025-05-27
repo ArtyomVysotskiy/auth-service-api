@@ -4,6 +4,7 @@ from uuid import UUID
 
 from app.models.user import User
 
+
 class UserGateway(Protocol):
     @abstractmethod
     async def get_by_id(self, user_id: UUID) -> User | None: ...
