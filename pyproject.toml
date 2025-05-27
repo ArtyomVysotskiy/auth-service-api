@@ -53,7 +53,7 @@ exclude = ["app.adapters.db.alembic"]
 
 [tool.coverage.run]
 branch = true
-omit = ["src/app/adapters/db/alembic/**/*.py", "src/filler/**/*.py"]
+omit = ["src/app/adapters/db/alembic/**/*.py"]
 
 [tool.ruff]
 line-length = 120
