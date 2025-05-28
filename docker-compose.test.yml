@@ -34,3 +34,8 @@ services:
         extends:
             file: docker-compose.base.yml
             service: db
+
+    grafana:
+        extends:
+            file: docker-compose.base.yml
+            service: grafana
