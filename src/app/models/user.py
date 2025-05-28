@@ -14,4 +14,4 @@ class User(Base):
     name: Mapped[str] = mapped_column(nullable=False, unique=True)
     age: Mapped[int | None] = mapped_column(nullable=True)
     description: Mapped[str | None] = mapped_column(nullable=True)
-    created_at: Mapped[datetime] =  mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)

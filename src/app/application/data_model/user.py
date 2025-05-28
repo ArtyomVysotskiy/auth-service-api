@@ -12,4 +12,5 @@ class UserData(BaseModel):
     age: int | None = Field(default=None, description="Возраст пользователя")
     description: str | None = Field(default=None, description="Описание пользователя")
 
+
 convert_user_model_to_dto = get_converter(User, UserData)

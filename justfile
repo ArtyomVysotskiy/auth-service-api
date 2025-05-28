@@ -1,17 +1,10 @@
-up:
-    sudo docker compose up --build
+set shell := ["cmd", "-c"]
 
-e2e:
-    sudo docker compose -f docker-compose.test.yml up --build --abort-on-container-exit
+mod docker '.just/docker.just'
+mod lint '.just/lint.just'
+mod tests '.just/test.just'
 
-down:
-    sudo docker compose down
-    sudo docker compose -f docker-compose.test.yml down
-
-clear:
-    sudo docker compose down -v
-
-lint:
-    ruff format
-    ruff check --fix
-    mypy
+[no-cd]
+dev:
+    uv pip install -e ".[dev]"
+    pre-commit install
