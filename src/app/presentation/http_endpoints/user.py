@@ -1,15 +1,12 @@
-from http.client import responses
 from typing import Annotated
-from uuid import UUID
 
 from dishka import FromDishka
 from dishka.integrations.fastapi import DishkaRoute
-from fastapi import APIRouter, Depends, Path
+from fastapi import APIRouter, Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from app.application.data_model.user import UserData
 from app.application.data_model.token_data import TokenResponse
-from app.application.errors.common import ApplicationError
+from app.application.data_model.user import UserData
 from app.application.user.read_user import ReadUser
 from app.application.user.sign_in import SignInUser, SignInUserRequest
 from app.application.user.sign_up import SignUpUser, SignUpUserRequest
@@ -24,23 +21,18 @@ router = APIRouter(
 
 security = HTTPBearer(auto_error=False)
 
+
 @router.post(
     "/sign_up",
     description="Авторизация пользователя",
     responses={
-        200: {
-            "model": TokenResponse,
-            "description": "Успешная авторизация пользователя"
-        },
-        409: {
-            "model": ErrorModel,
-            "description": "Пользователь с таким name уже существует"
-        }
-    }
+        200: {"model": TokenResponse, "description": "Успешная авторизация пользователя"},
+        409: {"model": ErrorModel, "description": "Пользователь с таким name уже существует"},
+    },
 )
 async def sign_up_user(
-        schema: SignUpUserRequest,
-        interactor: FromDishka[SignUpUser],
+    schema: SignUpUserRequest,
+    interactor: FromDishka[SignUpUser],
 ) -> TokenResponse:
     return await interactor.execute(schema)
 
@@ -80,6 +72,7 @@ async def update_user(
 ) -> None:
     return await interactor.execute(schema)
 
+
 @router.get(
     "/me",
     description="Получение данных о себе",
@@ -92,7 +85,7 @@ async def update_user(
     },
 )
 async def read_user(
-        command: FromDishka[ReadUser],
-        _token: Annotated[HTTPAuthorizationCredentials, Depends(security)],
+    command: FromDishka[ReadUser],
+    _token: Annotated[HTTPAuthorizationCredentials, Depends(security)],
 ) -> UserData:
     return await command.execute()

@@ -47,7 +47,6 @@ def include_routers(app: FastAPI) -> None:
     app.include_router(user_router)
 
 
-
 def include_exception_handlers(app: FastAPI) -> None:
     app.add_exception_handler(ApplicationError, app_exception_handler)  # type: ignore
     app.add_exception_handler(RequestValidationError, validation_exception_handler)  # type: ignore

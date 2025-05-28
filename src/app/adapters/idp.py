@@ -8,7 +8,7 @@ from jwt.exceptions import PyJWTError
 from app.adapters.token_encoder import TokenEncoder
 from app.application.errors.common import ApplicationError
 
-TOKEN_TYPE = "Bearer"
+TOKEN_TYPE = "Bearer"  # noqa: S105
 BEARER_SECTIONS = 2
 AUTH_HEADER = "Authorization"
 

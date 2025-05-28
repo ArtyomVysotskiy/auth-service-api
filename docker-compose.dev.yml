@@ -1,0 +1,39 @@
+services:
+    grafana:
+        extends:
+            file: docker-compose.base.yml
+            service: grafana
+        volumes:
+            - grafana_data:/var/lib/grafana
+
+    nginx:
+        extends:
+            file: docker-compose.base.yml
+            service: nginx
+        depends_on:
+            - api
+            - grafana
+
+    api:
+        extends:
+            file: docker-compose.base.yml
+            service: api
+
+        volumes:
+            - "./src/app/adapters/db/alembic/migrations/versions/:/home/app/src/app/adapters/db/alembic/migrations/versions/"
+
+        depends_on:
+            db:
+                condition: service_healthy
+
+    db:
+        extends:
+            file: docker-compose.base.yml
+            service: db
+        volumes:
+            - pg_data:/var/lib/postgresql/data/
+
+volumes:
+    pg_data:
+    grafana_data:
+    minio_data:

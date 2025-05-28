@@ -42,8 +42,8 @@ def run_api(_args: list[str]) -> None:
     app = FastAPI(
         lifespan=lifespan,
         docs_url="/docs",
-        title="Mentoro",
-        description="API сервиса по подбору менторов.",
+        title="auth-service-api",
+        description="API сервиса аутентификации/просмотра профиля пользователя",
         version="1.0.0",
         openapi_url="/openapi.json",
     )

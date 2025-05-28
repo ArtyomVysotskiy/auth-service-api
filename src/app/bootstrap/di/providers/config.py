@@ -1,4 +1,4 @@
-from dishka import Provider, Scope, from_context, provide
+from dishka import Provider, Scope, from_context
 
 from app.adapters.config import PostgresqlConfig, SecretConfig
 
@@ -6,7 +6,4 @@ from app.adapters.config import PostgresqlConfig, SecretConfig
 class ConfigProvider(Provider):
     scope = Scope.APP
 
-    configs = (
-        from_context(PostgresqlConfig)
-        + from_context(SecretConfig)
-    )
+    configs = from_context(PostgresqlConfig) + from_context(SecretConfig)

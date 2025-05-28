@@ -4,5 +4,5 @@ from app.application.gateway.token_gateway import AccessTokenGateway
 
 
 class AccessTokenGatewayImpl(AccessTokenGateway):
-    def __init__(self, session: AsyncSession):
+    def __init__(self, session: AsyncSession) -> None:
         self._session = session

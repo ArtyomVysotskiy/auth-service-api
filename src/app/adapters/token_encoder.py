@@ -7,7 +7,7 @@ from app.adapters.config import SecretConfig
 
 
 class TokenEncoder:
-    def __init__(self, secret: SecretConfig):
+    def __init__(self, secret: SecretConfig) -> None:
         self._secret = secret
 
     def encrypt(self, user_id: UUID) -> str:

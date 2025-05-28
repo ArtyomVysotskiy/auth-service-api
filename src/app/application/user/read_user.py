@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from uuid import UUID
 
 from app.adapters.idp import TokenUserIdProvider, UnauthorizedError
 from app.application.data_model.user import UserData, convert_user_model_to_dto

@@ -6,8 +6,8 @@ from app.adapters.idp import UnauthorizedError
 from app.adapters.token_encoder import TokenEncoder
 from app.application.common.uow import UoW
 from app.application.data_model.token_data import TokenResponse
-from app.application.gateway.user_gateway import UserGateway
 from app.application.gateway.token_gateway import AccessTokenGateway
+from app.application.gateway.user_gateway import UserGateway
 
 
 class SignInUserRequest(BaseModel):

@@ -2,7 +2,6 @@ from app.adapters.idp import UnauthorizedError
 from app.application.errors.common import AccessDeniedError, ApplicationError
 from app.application.errors.user_errors import UserDoesNotExistsError
 
-
 error_code = {
     ApplicationError: 500,
     UserDoesNotExistsError: 404,

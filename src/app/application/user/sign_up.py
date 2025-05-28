@@ -1,6 +1,5 @@
 from dataclasses import dataclass
-from datetime import UTC, datetime
-from typing import Annotated
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from pydantic import BaseModel, Field
@@ -8,8 +7,8 @@ from pydantic import BaseModel, Field
 from app.adapters.token_encoder import TokenEncoder
 from app.application.common.uow import UoW
 from app.application.data_model.token_data import TokenResponse
-from app.application.gateway.user_gateway import UserGateway
 from app.application.gateway.token_gateway import AccessTokenGateway
+from app.application.gateway.user_gateway import UserGateway
 from app.models.user import User
 
 
@@ -33,7 +32,7 @@ class SignUpUser:
             name=request.name,
             age=request.age,
             description=request.description,
-            created_at=datetime.now(tz=UTC),
+            created_at=datetime.now(tz=timezone.utc),
         )
         self.uow.add(user)
 

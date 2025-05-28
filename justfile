@@ -1,10 +1,28 @@
-set shell := ["cmd", "-c"]
+set windows-powershell := true
 
-mod docker '.just/docker.just'
-mod lint '.just/lint.just'
-mod tests '.just/test.just'
-
-[no-cd]
 dev:
-    uv pip install -e ".[dev]"
-    pre-commit install
+    just down
+    docker compose -f docker-compose.dev.yml up --build
+
+e2e:
+    docker compose -f docker-compose.test.yml up --build --abort-on-container-exit
+    just down
+
+down:
+    docker compose -f docker-compose.dev.yml down
+    docker compose -f docker-compose.test.yml down
+
+clear:
+    docker compose -f docker-compose.dev.yml down -v
+
+lint:
+    ruff format
+    ruff check --fix
+    mypy
+
+migration ARG1:
+    docker exec -it api auth-service-api migrations autogenerate {{ARG1}}
+
+check:
+    just lint
+    just e2e
